@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Condo - Roblox</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="https://upload.wikimedia.org/wikipedia/commons/7/70/Roblox_Corporation_2025_logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --rbx-bg: #111214;
+            --rbx-nav: #191b1f;
+            --rbx-card: #1e2024;
+            --rbx-card-hover: #27292e;
+            --rbx-border: rgba(255, 255, 255, 0.08);
+            --rbx-green: #00b06f;
+            --rbx-green-hover: #00c47c;
+            --rbx-text: #ffffff;
+            --rbx-subtext: #bdbebe;
+            --rbx-muted: #848688;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body {
+            background-color: var(--rbx-bg);
+            color: var(--rbx-text);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+        a { color: inherit; text-decoration: none; }
+
+        /* Top Roblox Navigation */
+        .rbx-navbar {
+            background: var(--rbx-nav);
+            border-bottom: 1px solid var(--rbx-border);
+            height: 56px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .rbx-nav-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .rbx-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.5px;
+        }
+        .rbx-logo-tilt {
+            width: 26px; height: 26px;
+            border: 5px solid #fff;
+            border-radius: 4px;
+            transform: rotate(14deg);
+            display: inline-block;
+            position: relative;
+        }
+        .rbx-logo-tilt::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            background: var(--rbx-nav);
+        }
+        .rbx-nav-links {
+            display: none;
+            gap: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--rbx-subtext);
+        }
+        @media (min-width: 768px) { .rbx-nav-links { display: flex; } }
+        .rbx-nav-links span.active {
+            color: #fff;
+            position: relative;
+        }
+        .rbx-nav-links span.active::after {
+            content: '';
+            position: absolute;
+            bottom: -17px; left: 0; right: 0;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        .rbx-search {
+            flex-grow: 1;
+            max-width: 380px;
+            position: relative;
+        }
+        .rbx-search input {
+            width: 100%;
+            background: #111214;
+            border: 1px solid var(--rbx-border);
+            border-radius: 8px;
+            padding: 7px 14px 7px 36px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .rbx-search input:focus { border-color: rgba(255, 255, 255, 0.35); }
+        .rbx-search i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--rbx-muted);
+            font-size: 13px;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 24px 20px 60px;
+        }
+
+        /* Category Filter Pills */
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .pill-group {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .filter-pill {
+            background: var(--rbx-card);
+            border: 1px solid var(--rbx-border);
+            color: var(--rbx-subtext);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.15s ease;
+        }
+        .filter-pill:hover { background: var(--rbx-card-hover); color: #fff; }
+        .filter-pill.active {
+            background: #fff;
+            color: #111214;
+            border-color: #fff;
+        }
+
+        /* Game Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (min-width: 640px) { .games-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+        @media (min-width: 1024px) { .games-grid { grid-template-columns: repeat(4, 1fr); gap: 22px; } }
+
+        .game-tile {
+            background: var(--rbx-card);
+            border: 1px solid var(--rbx-border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+            cursor: pointer;
+        }
+        .game-tile:hover {
+            transform: translateY(-4px);
+            background: var(--rbx-card-hover);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+        }
+        .tile-thumb {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            background: #0d0e10;
+            overflow: hidden;
+        }
+        .tile-thumb img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .game-tile:hover .tile-thumb img { transform: scale(1.04); }
+        .vip-badge {
+            position: absolute;
+            bottom: 8px; left: 8px;
+            background: rgba(0, 176, 111, 0.92);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 5px;
+            letter-spacing: 0.3px;
+        }
+        .tile-body {
+            padding: 12px 14px 14px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .tile-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .tile-stats {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.78rem;
+            color: var(--rbx-subtext);
+            margin-bottom: 12px;
+        }
+        .rbx-play-btn {
+            width: 100%;
+            background: var(--rbx-green);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.88rem;
+            padding: 9px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: auto;
+            transition: background 0.15s ease;
+        }
+        .rbx-play-btn:hover { background: var(--rbx-green-hover); }
+
+        /* Game Details Sheet */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.active { display: flex; }
+
+        .details-sheet {
+            background: var(--rbx-nav);
+            border: 1px solid var(--rbx-border);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 680px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+            animation: popUp 0.2s ease-out;
+        }
+        @keyframes popUp { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+
+        .sheet-banner {
+            position: relative;
+            height: 220px;
+            background: #0d0e10;
+        }
+        .sheet-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .sheet-close {
+            position: absolute;
+            top: 14px; right: 14px;
+            width: 34px; height: 34px;
+            background: rgba(17, 18, 20, 0.85);
+            border-radius: 50%;
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-size: 15px;
+        }
+        .sheet-close:hover { background: #ef4444; }
+        .sheet-content { padding: 22px 24px; }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: var(--rbx-bg);
+            padding: 12px;
+            border-radius: 10px;
+            margin: 16px 0;
+            text-align: center;
+        }
+        .meta-label { font-size: 0.72rem; color: var(--rbx-muted); }
+        .meta-value { font-size: 0.9rem; font-weight: 700; margin-top: 2px; }
+
+        /* Full Authentic Google Chrome Window Modal (Fake Tab + Fake URL Bar) */
+        .browser-modal-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+        }
+        .browser-modal-overlay.active { display: flex; }
+        .chrome-window {
+            width: 100%;
+            max-width: 1050px;
+            height: 100vh;
+            height: 100dvh;
+            background: #ffffff;
+            border-radius: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            font-family: system-ui, -apple-system, sans-serif;
+            position: relative;
+        }
+        @media(min-width: 768px) {
+            .chrome-window { border-radius: 8px; height: 84vh; width: 92vw; }
+            .browser-modal-overlay { padding: 20px; }
+        }
+        .chrome-titlebar {
+            background: #dee1e6;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px;
+            flex-shrink: 0;
+        }
+        .chrome-tabs {
+            display: flex;
+            height: 30px;
+            margin-top: 6px;
+        }
+        .chrome-tab {
+            background: #ffffff;
+            border-radius: 6px 6px 0 0;
+            padding: 0 10px;
+            min-width: 130px;
+            max-width: 210px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .chrome-tab-icon { width: 14px; height: 14px; margin-right: 7px; }
+        .chrome-tab-title {
+            font-size: 11px;
+            color: #333;
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 500;
+        }
+        .chrome-tab-close {
+            font-size: 14px;
+            color: #5f6368;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-left: 4px;
+        }
+        .chrome-tab-close:hover { background: #e8eaed; }
+        .chrome-window-controls { display: flex; }
+        .chrome-window-controls span {
+            width: 34px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #333;
+            cursor: pointer;
+        }
+        .chrome-window-controls .chrome-close-btn:hover { background: #e81123; color: white; }
+        .chrome-toolbar {
+            background: #ffffff;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            border-bottom: 1px solid #dadce0;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .chrome-nav-btns { display: flex; gap: 2px; }
+        .chrome-icon { width: 24px; height: 24px; padding: 4px; border-radius: 50%; fill: #5f6368; cursor: pointer; }
+        .chrome-address-bar {
+            flex-grow: 1;
+            background: #f1f3f4;
+            height: 28px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            gap: 6px;
+        }
+        .chrome-lock { width: 11px; height: 11px; fill: #5f6368; flex-shrink: 0; }
+        .chrome-url {
+            font-size: 12px;
+            color: #202124;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .chrome-url-dim { color: #5f6368; }
+        .browser-content {
+            flex-grow: 1;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .browser-content iframe {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .infinite-loader {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.85rem;
+            color: var(--rbx-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <!-- Top Roblox Navigation -->
+    <nav class="rbx-navbar">
+        <div class="rbx-nav-left">
+            <a href="#" class="rbx-logo">
+                <span class="rbx-logo-tilt"></span>
+                <span>Condo</span>
+            </a>
+            <div class="rbx-nav-links">
+                <span class="active">Charts</span>
+                <span onclick="filterByCategory('Hangout', document.querySelector('.filter-pill:nth-child(2)'))" style="cursor:pointer;">Hangout</span>
+                <span onclick="filterByCategory('Roleplay', document.querySelector('.filter-pill:nth-child(3)'))" style="cursor:pointer;">Roleplay</span>
+                <span onclick="filterByCategory('Vibe', document.querySelector('.filter-pill:nth-child(4)'))" style="cursor:pointer;">Vibe</span>
+            </div>
+        </div>
+
+        <div class="rbx-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search games..." oninput="handleSearch()">
+        </div>
+
+        <div>
+            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" style="background:#27292e; padding:7px 14px; border-radius:8px; font-size:0.82rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
+                <i class="fa-brands fa-discord" style="color:#5865F2;"></i> Discord
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Category Pills -->
+        <div class="filter-bar">
+            <div class="pill-group" id="categoryPills">
+                <button class="filter-pill active" onclick="filterByCategory('All', this)">All Games</button>
+                <button class="filter-pill" onclick="filterByCategory('Hangout', this)">Hangout</button>
+                <button class="filter-pill" onclick="filterByCategory('Roleplay', this)">Roleplay</button>
+                <button class="filter-pill" onclick="filterByCategory('Vibe', this)">Vibe</button>
+            </div>
+            <div style="font-size:0.82rem; color:var(--rbx-muted); font-weight:600;" id="resultCount">Showing games</div>
+        </div>
+
+        <!-- Game Tiles Grid -->
+        <div class="games-grid" id="gamesGrid"></div>
+        <div class="infinite-loader" id="infiniteLoader">
+            <i class="fa-solid fa-circle-notch fa-spin"></i> Loading more games...
+        </div>
+    </main>
+
+    <!-- Game Details Modal -->
+    <div class="modal-overlay" id="detailsModal" onclick="if(event.target === this) closeDetails()">
+        <div class="details-sheet">
+            <div class="sheet-banner">
+                <img id="detailImg" src="" alt="Banner">
+                <button class="sheet-close" onclick="closeDetails()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="sheet-content">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+                    <div>
+                        <h2 id="detailTitle" style="font-size:1.4rem; font-weight:800;">Game Title</h2>
+                        <div style="font-size:0.82rem; color:var(--rbx-subtext); margin-top:2px;">
+                            By <strong id="detailCreator">Creator</strong> <i class="fa-solid fa-circle-check" style="color:#3b82f6; font-size:12px;"></i>
+                        </div>
+                    </div>
+                    <span id="detailGenre" style="background:#27292e; padding:5px 12px; border-radius:20px; font-size:0.75rem; font-weight:700; color:var(--rbx-subtext);">Hangout</span>
+                </div>
+
+                <div class="meta-grid">
+                    <div>
+                        <div class="meta-label">Playing</div>
+                        <div class="meta-value" id="detailPlayers">18 / 20</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">Rating</div>
+                        <div class="meta-value" id="detailRating" style="color:var(--rbx-green);">98%</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">Server</div>
+                        <div class="meta-value" id="detailRegion">Private VIP</div>
+                    </div>
+                </div>
+
+                <h4 style="font-size:0.88rem; font-weight:700; margin-bottom:6px;">Description</h4>
+                <p id="detailDesc" style="font-size:0.85rem; color:var(--rbx-subtext); margin-bottom:20px; line-height:1.55;"></p>
+
+                <button class="rbx-play-btn" id="detailPlayBtn" style="padding:13px; font-size:1rem;">
+                    <i class="fa-solid fa-play"></i> Play
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connecting Status Popup -->
+    <div id="loadingModal" style="position:fixed; inset:0; background:rgba(17,18,20,0.85); z-index:99998; display:none; align-items:center; justify-content:center; backdrop-filter:blur(4px); padding:16px;">
+        <div style="background:#191b1f; padding:24px; border-radius:14px; text-align:center; border:1px solid rgba(255,255,255,0.1); max-width:280px; width:100%;">
+            <div style="width:36px; height:36px; border:3px solid rgba(255,255,255,0.15); border-top:3px solid #00b06f; border-radius:50%; animation:spin 0.9s linear infinite; margin:0 auto 12px;"></div>
+            <h3 style="margin:0 0 6px; font-size:1rem; color:#fff;">Starting Roblox...</h3>
+            <p id="loadingText" style="margin:0; font-size:0.8rem; color:#bdbebe;">Joining private server</p>
+        </div>
+    </div>
+
+    <!-- Full Chrome Tab & Fake URL Bar Modal -->
+    <div id="browserModal" class="browser-modal-overlay">
+        <div class="chrome-window">
+            <div class="chrome-titlebar">
+                <div class="chrome-tabs">
+                    <div class="chrome-tab active">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Roblox_Corporation_2025_logo.svg" class="chrome-tab-icon" id="modalTabIcon" alt="Logo">
+                        <span class="chrome-tab-title" id="modalTabTitle">Roblox</span>
+                        <span class="chrome-tab-close" id="closeTabBtn">&times;</span>
+                    </div>
+                </div>
+                <div class="chrome-window-controls">
+                    <span class="chrome-close-btn" id="closeBrowserBtn">&#10005;</span>
+                </div>
+            </div>
+            <div class="chrome-toolbar">
+                <div class="chrome-nav-btns">
+                    <svg viewBox="0 0 24 24" class="chrome-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg>
+                    <svg viewBox="0 0 24 24" class="chrome-icon"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>
+                </div>
+                <div class="chrome-address-bar">
+                    <svg viewBox="0 0 24 24" class="chrome-lock"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path></svg>
+                    <span class="chrome-url" id="fakeUrlText"><span class="chrome-url-dim">https://</span>www.roblox.com/games/...</span>
+                </div>
+            </div>
+            <div class="browser-content">
+                <iframe id="browserIframe" src="about:blank" sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-modals"></iframe>
+            </div>
+        </div>
+  </div>
+      <script>
+        const SINGLE_GAME_LINK = "https://www.roblox.com.am/games/71007326530715/AI-Town?privateServerLinkCode=83872921682350434392286111406032";
+
+        const gameThumbs = [
+            "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1618172193622-ae2d025f4032?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80"
+        ];
+
+        const gameTitles = [
+            "Late Night Condo Hangout",
+            "Vibe Penthouse Suite",
+            "Neko Cafe & Lounge",
+            "Private Apartment RP",
+            "Sunset Rooftop Hangout",
+            "Midnight Club & Condo",
+            "Cozy Bedroom Vibe",
+            "Luxury Villa RP",
+            "Tokyo Night Hangout",
+            "Secret Basement Condo",
+            "Chill Vibes & Radio",
+            "Neon Loft Hangout",
+            "Afterhours Club RP",
+            "Private Beach House",
+            "Aesthetic Room Vibe",
+            "Skyline Condo [VOICE CHAT]"
+        ];
+
+        const creators = [
+            "xVibeDev", "KairoBuilds", "LofiStudio", "NekoWorks", 
+            "ZayCreates", "MochiDev", "VexedRBLX", "CloudNineGames"
+        ];
+
+        const descriptions = [
+            "Chill hangout map with working radio, custom animations, and private rooms. Be respectful and have fun.",
+            "Private server link active! Features updated lighting, custom morphs, and voice chat support.",
+            "Hang out with friends, play music on the boombox, and explore the upstairs suites.",
+            "Updated map with new poses, cozy rooms, and smooth FPS. Join the private server to skip full lobbies."
+        ];
+
+        const genres = ["Hangout", "Roleplay", "Vibe"];
+
+        let gamesList = [];
+        for (let i = 1; i <= 24; i++) {
+            gamesList.push(makeGameItem(i));
+        }
+
+        let activeCategory = "All";
+        let visibleCount = 12;
+        let loadingMore = false;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderGames();
+            window.addEventListener("scroll", onScrollBottom);
+        });
+
+        function makeGameItem(index) {
+            const baseTitle = gameTitles[(index - 1) % gameTitles.length];
+            const versionTag = index > gameTitles.length ? ` v${Math.floor(index / gameTitles.length) + 1}` : "";
+            const fullTitle = `${baseTitle}${versionTag}`;
+            const slug = fullTitle.replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "");
+            const fakePlaceId = 71007326530 + (index * 137);
+
+            return {
+                id: `game_${index}`,
+                title: fullTitle,
+                creator: creators[index % creators.length],
+                genre: genres[index % genres.length],
+                players: `${Math.floor(Math.random() * 8) + 11}/20`,
+                rating: `${Math.floor(Math.random() * 11) + 88}%`,
+                serverType: "VIP Server",
+                thumb: gameThumbs[(index - 1) % gameThumbs.length],
+                desc: descriptions[index % descriptions.length],
+                realUrl: SINGLE_GAME_LINK,
+                fakeUrl: `www.roblox.com/games/${fakePlaceId}/${slug}`
+            };
+        }
+
+        function renderGames() {
+            const grid = document.getElementById("gamesGrid");
+            const searchVal = document.getElementById("searchInput").value.toLowerCase();
+
+            const filtered = gamesList.filter(g => {
+                const matchCat = activeCategory === "All" || g.genre === activeCategory;
+                const matchQuery = g.title.toLowerCase().includes(searchVal) || g.creator.toLowerCase().includes(searchVal);
+                return matchCat && matchQuery;
+            });
+
+            const slice = filtered.slice(0, visibleCount);
+            grid.innerHTML = "";
+
+            if (slice.length === 0) {
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:48px; color:var(--rbx-muted); background:var(--rbx-card); border-radius:12px;">No games found for "${searchVal}".</div>`;
+                document.getElementById("infiniteLoader").style.display = "none";
+                document.getElementById("resultCount").textContent = "0 Games";
+                return;
+            }
+
+            slice.forEach(game => {
+                const card = document.createElement("div");
+                card.className = "game-tile";
+                card.onclick = (e) => {
+                    if (!e.target.closest("button")) openDetails(game.id);
+                };
+
+                card.innerHTML = `
+                    <div class="tile-thumb">
+                        <span class="vip-badge">VIP</span>
+                        <img src="${game.thumb}" alt="${game.title}">
+                    </div>
+                    <div class="tile-body">
+                        <div class="tile-title" title="${game.title}">${game.title}</div>
+                        <div class="tile-stats">
+                            <span><i class="fa-solid fa-thumbs-up"></i> ${game.rating}</span>
+                            <span><i class="fa-solid fa-user"></i> ${game.players}</span>
+                        </div>
+                        <button class="rbx-play-btn" onclick="launchGame('${game.id}')">
+                            <i class="fa-solid fa-play"></i> Play
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById("resultCount").textContent = `Showing ${slice.length} games`;
+            document.getElementById("infiniteLoader").style.display = slice.length < filtered.length ? "flex" : "none";
+        }
+
+        function onScrollBottom() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
+                if (!loadingMore) {
+                    loadingMore = true;
+                    setTimeout(() => {
+                        const startId = gamesList.length + 1;
+                        for (let i = 0; i < 8; i++) {
+                            gamesList.push(makeGameItem(startId + i));
+                        }
+                        visibleCount += 8;
+                        renderGames();
+                        loadingMore = false;
+                    }, 350);
+                }
+            }
+        }
+
+        function filterByCategory(cat, btn) {
+            activeCategory = cat;
+            visibleCount = 12;
+            if (btn) {
+                document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+                btn.classList.add("active");
+            }
+            renderGames();
+        }
+
+        function handleSearch() {
+            visibleCount = 12;
+            renderGames();
+        }
+
+        function openDetails(id) {
+            const game = gamesList.find(g => g.id === id);
+            if (!game) return;
+
+            document.getElementById("detailImg").src = game.thumb;
+            document.getElementById("detailTitle").textContent = game.title;
+            document.getElementById("detailCreator").textContent = game.creator;
+            document.getElementById("detailGenre").textContent = game.genre;
+            document.getElementById("detailPlayers").textContent = game.players;
+            document.getElementById("detailRating").textContent = game.rating;
+            document.getElementById("detailRegion").textContent = game.serverType;
+            document.getElementById("detailDesc").textContent = game.desc;
+
+            const playBtn = document.getElementById("detailPlayBtn");
+            playBtn.onclick = () => {
+                closeDetails();
+                launchGame(game.id);
+            };
+
+            document.getElementById("detailsModal").classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeDetails() {
+            document.getElementById("detailsModal").classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        function launchGame(id) {
+            const game = gamesList.find(g => g.id === id);
+            if (!game) return;
+
+            const loadingModal = document.getElementById("loadingModal");
+            document.getElementById("loadingText").textContent = `Joining ${game.title}...`;
+            loadingModal.style.display = "flex";
+
+            setTimeout(() => {
+                loadingModal.style.display = "none";
+                openChromeModal(game.realUrl, `${game.title} - Roblox`, game.fakeUrl);
+            }, 650);
+        }
+
+        function openChromeModal(targetUrl, tabTitle, fakeDisplayUrl) {
+            const modal = document.getElementById("browserModal");
+            const iframe = document.getElementById("browserIframe");
+
+            iframe.src = targetUrl;
+            document.getElementById("modalTabTitle").textContent = tabTitle;
+            document.getElementById("fakeUrlText").innerHTML = `<span class="chrome-url-dim">https://</span>${fakeDisplayUrl}`;
+
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeChromeModal() {
+            const modal = document.getElementById("browserModal");
+            modal.classList.remove("active");
+            document.getElementById("browserIframe").src = "about:blank";
+            document.body.style.overflow = "";
+        }
+
+        document.getElementById("closeBrowserBtn").addEventListener("click", closeChromeModal);
+        document.getElementById("closeTabBtn").addEventListener("click", closeChromeModal);
+    </script>
+</body>
+</html>
