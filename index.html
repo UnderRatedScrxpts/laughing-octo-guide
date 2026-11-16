@@ -11,22 +11,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.04);
-            --glass-bg-hover: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --glass-border-hover: rgba(255, 255, 255, 0.28);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-bg-hover: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 182, 222, 0.25);
+            --glass-border-hover: rgba(255, 182, 222, 0.6);
+            --glass-shadow: 0 10px 35px 0 rgba(100, 20, 80, 0.35);
             --rbx-green: #00b06f;
             --rbx-green-hover: #00c47c;
             --rbx-text: #ffffff;
-            --rbx-subtext: #d1d5db;
-            --rbx-muted: #9ca3af;
+            --rbx-subtext: #f3eaf8;
+            --rbx-muted: #d8b4e2;
             --rbx-yellow: #facc15;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body {
-            background: linear-gradient(rgba(10, 11, 15, 0.7), rgba(10, 11, 15, 0.85)), 
+            background: linear-gradient(rgba(40, 15, 50, 0.75), rgba(20, 10, 30, 0.88)), 
                         url('https://cdn.phototourl.com/anon/2026-11-16-e6b748db-92de-414d-8266-593f9f63d7bb.jpg') center/cover fixed no-repeat;
             color: var(--rbx-text);
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -37,11 +37,11 @@
         button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
         a { color: inherit; text-decoration: none; }
 
-        /* Liquid Glass Top Navigation */
+        /* Liquid Glass Navigation */
         .rbx-navbar {
-            background: rgba(18, 20, 26, 0.45);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(45, 20, 60, 0.45);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             border-bottom: 1px solid var(--glass-border);
             height: 60px;
             padding: 0 16px;
@@ -83,8 +83,8 @@
         @media (min-width: 768px) { .rbx-nav-links { display: flex; } }
         .rbx-nav-links span.active { color: #fff; position: relative; }
         .rbx-nav-links span.active::after {
-            content: ''; position: absolute; bottom: -19px; left: 0; right: 0; height: 3px; background: #fff; border-radius: 2px;
-            box-shadow: 0 0 10px #fff;
+            content: ''; position: absolute; bottom: -19px; left: 0; right: 0; height: 3px; background: #ffb6de; border-radius: 2px;
+            box-shadow: 0 0 10px #ffb6de;
         }
 
         .rbx-search {
@@ -94,11 +94,11 @@
         }
         .rbx-search input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
-            border-radius: 10px;
+            border-radius: 20px;
             padding: 7px 14px 7px 34px;
             color: #fff;
             font-size: 0.82rem;
@@ -106,9 +106,9 @@
             transition: all 0.2s ease;
         }
         .rbx-search input:focus { 
-            border-color: rgba(255, 255, 255, 0.4); 
-            background: rgba(255, 255, 255, 0.09);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            border-color: var(--glass-border-hover); 
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(255, 182, 222, 0.25);
         }
         .rbx-search i {
             position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--rbx-muted); font-size: 12px;
@@ -140,19 +140,26 @@
         @media(min-width: 640px) { .pill-group { width: auto; } }
         .filter-pill {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             color: var(--rbx-subtext);
-            padding: 6px 14px;
+            padding: 7px 16px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
             white-space: nowrap;
             transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .filter-pill:hover { background: var(--glass-bg-hover); color: #fff; border-color: var(--glass-border-hover); }
-        .filter-pill.active { background: rgba(255, 255, 255, 0.9); color: #111214; border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.4); }
+        .filter-pill.active { 
+            background: linear-gradient(135deg, rgba(255, 150, 210, 0.6), rgba(200, 100, 255, 0.6)); 
+            backdrop-filter: blur(16px);
+            color: #fff; 
+            border-color: rgba(255,255,255,0.5); 
+            box-shadow: 0 0 20px rgba(255, 150, 210, 0.4); 
+        }
 
         /* Liquid Glass Game Tiles Grid */
         .games-grid {
@@ -165,12 +172,12 @@
         @media (min-width: 1080px) { .games-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
         .game-tile {
-            background: var(--glass-bg);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: rgba(35, 15, 50, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -180,8 +187,8 @@
         .game-tile:hover {
             transform: translateY(-4px);
             border-color: var(--glass-border-hover);
-            background: var(--glass-bg-hover);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.05);
+            background: rgba(50, 20, 70, 0.55);
+            box-shadow: 0 16px 40px rgba(120, 20, 100, 0.5), 0 0 25px rgba(255, 182, 222, 0.2);
         }
         .tile-thumb {
             position: relative;
@@ -211,28 +218,28 @@
         }
         .star-rating { color: var(--rbx-yellow); font-weight: 700; display: inline-flex; align-items: center; gap: 3px; }
         .rbx-play-btn {
-            width: 100%; background: var(--rbx-green); color: #fff;
-            font-weight: 700; font-size: 0.85rem; padding: 8px; border-radius: 8px;
+            width: 100%; background: linear-gradient(135deg, #00b06f, #00d284); color: #fff;
+            font-weight: 700; font-size: 0.85rem; padding: 8px; border-radius: 10px;
             display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: auto;
-            box-shadow: 0 4px 15px rgba(0, 176, 111, 0.3);
-            transition: background 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 4px 15px rgba(0, 176, 111, 0.35);
+            transition: all 0.2s ease;
         }
-        .rbx-play-btn:hover { background: var(--rbx-green-hover); box-shadow: 0 4px 20px rgba(0, 176, 111, 0.5); }
+        .rbx-play-btn:hover { background: linear-gradient(135deg, #00c47c, #00e695); box-shadow: 0 4px 20px rgba(0, 176, 111, 0.6); }
 
         /* Liquid Glass Modals */
         .modal-overlay {
-            position: fixed; inset: 0; background: rgba(5, 6, 9, 0.75); backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); z-index: 9998; display: none; align-items: center; justify-content: center; padding: 12px;
+            position: fixed; inset: 0; background: rgba(15, 5, 25, 0.75); backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px); z-index: 9998; display: none; align-items: center; justify-content: center; padding: 12px;
         }
         .modal-overlay.active { display: flex; }
         .details-sheet {
-            background: rgba(22, 25, 34, 0.75);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            background: rgba(30, 12, 45, 0.75);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
             border: 1px solid var(--glass-border);
-            border-radius: 18px;
+            border-radius: 20px;
             width: 100%; max-width: 620px; max-height: 90vh; overflow-y: auto;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,182,222,0.25);
         }
         .sheet-banner { position: relative; height: 190px; background: rgba(0,0,0,0.4); }
         @media(min-width:640px) { .sheet-banner { height: 210px; } }
@@ -247,23 +254,23 @@
 
         .meta-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-            background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); padding: 10px; border-radius: 10px; margin: 14px 0; text-align: center;
+            background: rgba(20, 8, 30, 0.4); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 10px; border-radius: 12px; margin: 14px 0; text-align: center;
         }
         .meta-label { font-size: 0.7rem; color: var(--rbx-muted); }
         .meta-value { font-size: 0.85rem; font-weight: 700; margin-top: 2px; }
 
         .reviews-box {
-            margin-top: 14px; background: rgba(0, 0, 0, 0.35); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 10px; padding: 12px;
+            margin-top: 14px; background: rgba(20, 8, 30, 0.45); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 12px;
         }
         .review-item {
-            font-size: 0.78rem; color: var(--rbx-subtext); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.78rem; color: var(--rbx-subtext); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .review-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
         .review-author { font-weight: 700; color: #fff; margin-bottom: 2px; display: flex; justify-content: space-between; }
 
         /* Chrome Window Modal */
         .browser-modal-overlay {
-            position: fixed; inset: 0; width: 100%; height: 100%; background: rgba(5, 6, 9, 0.82); backdrop-filter: blur(12px); z-index: 99999;
+            position: fixed; inset: 0; width: 100%; height: 100%; background: rgba(10, 3, 18, 0.85); backdrop-filter: blur(16px); z-index: 99999;
             display: none; align-items: center; justify-content: center;
         }
         .browser-modal-overlay.active { display: flex; }
@@ -271,7 +278,7 @@
             width: 100%; max-width: 1020px; height: 100vh; height: 100dvh; background: #ffffff;
             border-radius: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.8); position: relative;
         }
-        @media(min-width: 768px) { .chrome-window { border-radius: 10px; height: 82vh; width: 92vw; } .browser-modal-overlay { padding: 16px; } }
+        @media(min-width: 768px) { .chrome-window { border-radius: 12px; height: 82vh; width: 92vw; } .browser-modal-overlay { padding: 16px; } }
         .chrome-titlebar { background: #dee1e6; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; flex-shrink: 0; }
         .chrome-tabs { display: flex; height: 28px; margin-top: 6px; }
         .chrome-tab {
@@ -302,7 +309,7 @@
     </style>
 </head>
 <body>
-    <!-- Liquid Glass Top Navigation -->
+    <!-- Liquid Glass Navigation -->
     <nav class="rbx-navbar">
         <div class="rbx-nav-left">
             <a href="#" class="rbx-logo">
@@ -323,7 +330,7 @@
         </div>
 
         <div>
-            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" style="background:rgba(255,255,255,0.06); border:1px solid var(--glass-border); padding:6px 12px; border-radius:8px; font-size:0.78rem; font-weight:600; display:inline-flex; align-items:center; gap:5px;">
+            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" style="background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); padding:6px 14px; border-radius:20px; font-size:0.78rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
                 <i class="fa-brands fa-discord" style="color:#5865F2;"></i> Discord
             </a>
         </div>
@@ -382,10 +389,10 @@
                 </div>
 
                 <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:4px;">Room & Layout Details</h4>
-                <p id="detailRoom" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); padding:10px; border-radius:8px; border-left:3px solid #00b06f;"></p>
+                <p id="detailRoom" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); border:1px solid rgba(255,182,222,0.15); padding:10px; border-radius:10px; border-left:3px solid #00b06f;"></p>
 
                 <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:4px;">Animation & Position Setup</h4>
-                <p id="detailPos" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); padding:10px; border-radius:8px; border-left:3px solid #a855f7;"></p>
+                <p id="detailPos" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); border:1px solid rgba(255,182,222,0.15); padding:10px; border-radius:10px; border-left:3px solid #d946ef;"></p>
 
                 <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:6px;">Player Reviews</h4>
                 <div class="reviews-box" id="detailReviews"></div>
@@ -398,15 +405,15 @@
     </div>
 
     <!-- Connecting Status Popup -->
-    <div id="loadingModal" style="position:fixed; inset:0; background:rgba(5,6,9,0.85); z-index:99998; display:none; align-items:center; justify-content:center; backdrop-filter:blur(8px); padding:16px;">
-        <div style="background:rgba(25,27,35,0.8); backdrop-filter:blur(16px); border:1px solid var(--glass-border); padding:22px; border-radius:14px; text-align:center; max-width:270px; width:100%;">
+    <div id="loadingModal" style="position:fixed; inset:0; background:rgba(15,5,25,0.85); z-index:99998; display:none; align-items:center; justify-content:center; backdrop-filter:blur(10px); padding:16px;">
+        <div style="background:rgba(30,12,45,0.8); backdrop-filter:blur(20px); border:1px solid var(--glass-border); padding:22px; border-radius:16px; text-align:center; max-width:270px; width:100%; box-shadow:0 15px 35px rgba(0,0,0,0.5);">
             <div style="width:34px; height:34px; border:3px solid rgba(255,255,255,0.15); border-top:3px solid #00b06f; border-radius:50%; animation:spin 0.9s linear infinite; margin:0 auto 10px;"></div>
             <h3 style="margin:0 0 4px; font-size:0.95rem; color:#fff;">Starting Roblox...</h3>
-            <p id="loadingText" style="margin:0; font-size:0.78rem; color:#bdbebe;">Joining private server</p>
+            <p id="loadingText" style="margin:0; font-size:0.78rem; color:#d8b4e2;">Joining private server</p>
         </div>
     </div>
 
-    <!-- Full Chrome Tab & Fake URL Bar Modal (Using Authentic Roblox Logo) -->
+    <!-- Full Chrome Tab & Fake URL Bar Modal -->
     <div id="browserModal" class="browser-modal-overlay">
         <div class="chrome-window">
             <div class="chrome-titlebar">
@@ -557,7 +564,7 @@
             grid.innerHTML = "";
 
             if (slice.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--rbx-muted); background:var(--glass-bg); backdrop-filter:blur(10px); border-radius:14px; border:1px solid var(--glass-border);">No games found.</div>`;
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--rbx-muted); background:rgba(30,12,45,0.4); backdrop-filter:blur(14px); border-radius:16px; border:1px solid var(--glass-border);">No games found.</div>`;
                 document.getElementById("infiniteLoader").style.display = "none";
                 document.getElementById("resultCount").textContent = "0 Games";
                 return;
