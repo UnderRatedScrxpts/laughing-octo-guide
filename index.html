@@ -11,22 +11,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.06);
-            --glass-bg-hover: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 182, 222, 0.25);
-            --glass-border-hover: rgba(255, 182, 222, 0.6);
-            --glass-shadow: 0 10px 35px 0 rgba(100, 20, 80, 0.35);
-            --rbx-green: #00b06f;
-            --rbx-green-hover: #00c47c;
+            --glass-bg: rgba(255, 255, 255, 0.14);
+            --glass-bg-hover: rgba(255, 255, 255, 0.22);
+            --glass-border: rgba(255, 255, 255, 0.45);
+            --glass-border-hover: rgba(255, 182, 240, 0.9);
+            --glass-shadow: 0 12px 40px 0 rgba(200, 50, 160, 0.35);
+            --rbx-green: #00cc82;
+            --rbx-green-hover: #00ea99;
             --rbx-text: #ffffff;
-            --rbx-subtext: #f3eaf8;
-            --rbx-muted: #d8b4e2;
-            --rbx-yellow: #facc15;
+            --rbx-subtext: #fdf4ff;
+            --rbx-muted: #f3c6ff;
+            --rbx-yellow: #fde047;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body {
-            background: linear-gradient(rgba(40, 15, 50, 0.75), rgba(20, 10, 30, 0.88)), 
+            background: linear-gradient(rgba(100, 30, 130, 0.45), rgba(40, 10, 70, 0.65)), 
                         url('https://cdn.phototourl.com/anon/2026-11-16-e6b748db-92de-414d-8266-593f9f63d7bb.jpg') center/cover fixed no-repeat;
             color: var(--rbx-text);
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -37,11 +37,11 @@
         button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
         a { color: inherit; text-decoration: none; }
 
-        /* Liquid Glass Navigation */
+        /* Bright Liquid Glass Navigation */
         .rbx-navbar {
-            background: rgba(45, 20, 60, 0.45);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+            background: rgba(90, 30, 120, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
             height: 60px;
             padding: 0 16px;
@@ -52,6 +52,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
         }
         .rbx-nav-left {
             display: flex;
@@ -63,15 +64,16 @@
             align-items: center;
             gap: 8px;
             font-weight: 800;
-            font-size: 1.1rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-size: 1.15rem;
+            text-shadow: 0 2px 12px rgba(255, 100, 220, 0.6);
         }
         .custom-logo-img {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
             object-fit: cover;
-            border: 1px solid var(--glass-border);
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 12px rgba(255, 150, 240, 0.5);
         }
         .rbx-nav-links {
             display: none;
@@ -81,10 +83,10 @@
             color: var(--rbx-subtext);
         }
         @media (min-width: 768px) { .rbx-nav-links { display: flex; } }
-        .rbx-nav-links span.active { color: #fff; position: relative; }
+        .rbx-nav-links span.active { color: #fff; position: relative; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
         .rbx-nav-links span.active::after {
-            content: ''; position: absolute; bottom: -19px; left: 0; right: 0; height: 3px; background: #ffb6de; border-radius: 2px;
-            box-shadow: 0 0 10px #ffb6de;
+            content: ''; position: absolute; bottom: -19px; left: 0; right: 0; height: 3.5px; background: #ff99e6; border-radius: 2px;
+            box-shadow: 0 0 12px #ff99e6;
         }
 
         .rbx-search {
@@ -94,24 +96,26 @@
         }
         .rbx-search input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: 22px;
             padding: 7px 14px 7px 34px;
             color: #fff;
             font-size: 0.82rem;
             outline: none;
             transition: all 0.2s ease;
+            box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.2);
         }
+        .rbx-search input::placeholder { color: rgba(255, 255, 255, 0.75); }
         .rbx-search input:focus { 
-            border-color: var(--glass-border-hover); 
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 15px rgba(255, 182, 222, 0.25);
+            border-color: #ff99e6; 
+            background: rgba(255, 255, 255, 0.28);
+            box-shadow: 0 0 20px rgba(255, 150, 240, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.3);
         }
         .rbx-search i {
-            position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--rbx-muted); font-size: 12px;
+            position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: #fff; font-size: 12px;
         }
 
         .container {
@@ -121,7 +125,7 @@
         }
         @media(min-width: 640px) { .container { padding: 24px 20px 60px; } }
 
-        /* Liquid Glass Filter Bar */
+        /* Filter Bar */
         .filter-bar {
             display: flex;
             align-items: center;
@@ -139,10 +143,10 @@
         }
         @media(min-width: 640px) { .pill-group { width: auto; } }
         .filter-pill {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border: 1px solid var(--glass-border);
+            border: 1.5px solid var(--glass-border);
             color: var(--rbx-subtext);
             padding: 7px 16px;
             border-radius: 20px;
@@ -150,18 +154,18 @@
             font-weight: 600;
             white-space: nowrap;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
-        .filter-pill:hover { background: var(--glass-bg-hover); color: #fff; border-color: var(--glass-border-hover); }
+        .filter-pill:hover { background: rgba(255, 255, 255, 0.22); color: #fff; border-color: #ff99e6; }
         .filter-pill.active { 
-            background: linear-gradient(135deg, rgba(255, 150, 210, 0.6), rgba(200, 100, 255, 0.6)); 
-            backdrop-filter: blur(16px);
+            background: linear-gradient(135deg, rgba(255, 120, 220, 0.8), rgba(200, 80, 255, 0.8)); 
+            backdrop-filter: blur(18px);
             color: #fff; 
-            border-color: rgba(255,255,255,0.5); 
-            box-shadow: 0 0 20px rgba(255, 150, 210, 0.4); 
+            border-color: #ffffff; 
+            box-shadow: 0 0 25px rgba(255, 120, 220, 0.7), inset 0 1px 2px rgba(255,255,255,0.6); 
         }
 
-        /* Liquid Glass Game Tiles Grid */
+        /* Game Tiles Grid */
         .games-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -172,12 +176,12 @@
         @media (min-width: 1080px) { .games-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
         .game-tile {
-            background: rgba(35, 15, 50, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            border-radius: 16px;
+            background: rgba(80, 25, 110, 0.35);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1.5px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            border-radius: 18px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -185,68 +189,70 @@
             cursor: pointer;
         }
         .game-tile:hover {
-            transform: translateY(-4px);
-            border-color: var(--glass-border-hover);
-            background: rgba(50, 20, 70, 0.55);
-            box-shadow: 0 16px 40px rgba(120, 20, 100, 0.5), 0 0 25px rgba(255, 182, 222, 0.2);
+            transform: translateY(-5px);
+            border-color: #ff99e6;
+            background: rgba(100, 35, 140, 0.5);
+            box-shadow: 0 20px 45px rgba(180, 40, 150, 0.5), 0 0 25px rgba(255, 150, 240, 0.4), inset 0 1px 3px rgba(255,255,255,0.5);
         }
         .tile-thumb {
             position: relative;
             aspect-ratio: 16 / 10;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.25);
             overflow: hidden;
         }
         .tile-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .game-tile:hover .tile-thumb img { transform: scale(1.04); }
+        .game-tile:hover .tile-thumb img { transform: scale(1.05); }
         .vip-badge {
             position: absolute; bottom: 8px; left: 8px;
-            background: rgba(0, 176, 111, 0.9); backdrop-filter: blur(4px); color: #fff;
-            font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 6px;
+            background: rgba(0, 204, 130, 0.95); backdrop-filter: blur(6px); color: #fff;
+            font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 204, 130, 0.6);
         }
         .tile-body {
-            padding: 12px 14px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
         .tile-title {
-            font-weight: 700; font-size: 0.92rem; color: #fff; margin-bottom: 4px;
+            font-weight: 700; font-size: 0.95rem; color: #fff; margin-bottom: 4px;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
         }
         .tile-stats {
-            display: flex; align-items: center; justify-content: space-between; font-size: 0.76rem; color: var(--rbx-subtext); margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--rbx-subtext); margin-bottom: 12px;
         }
-        .star-rating { color: var(--rbx-yellow); font-weight: 700; display: inline-flex; align-items: center; gap: 3px; }
+        .star-rating { color: var(--rbx-yellow); font-weight: 700; display: inline-flex; align-items: center; gap: 3px; text-shadow: 0 0 8px rgba(250, 204, 21, 0.5); }
         .rbx-play-btn {
-            width: 100%; background: linear-gradient(135deg, #00b06f, #00d284); color: #fff;
-            font-weight: 700; font-size: 0.85rem; padding: 8px; border-radius: 10px;
+            width: 100%; background: linear-gradient(135deg, #00cc82, #00f59e); color: #fff;
+            font-weight: 700; font-size: 0.88rem; padding: 9px; border-radius: 12px;
             display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: auto;
-            box-shadow: 0 4px 15px rgba(0, 176, 111, 0.35);
+            box-shadow: 0 4px 18px rgba(0, 204, 130, 0.5), inset 0 1px 1px rgba(255,255,255,0.4);
             transition: all 0.2s ease;
         }
-        .rbx-play-btn:hover { background: linear-gradient(135deg, #00c47c, #00e695); box-shadow: 0 4px 20px rgba(0, 176, 111, 0.6); }
+        .rbx-play-btn:hover { background: linear-gradient(135deg, #00ea99, #1affaa); box-shadow: 0 6px 22px rgba(0, 204, 130, 0.8), inset 0 1px 2px rgba(255,255,255,0.6); }
 
-        /* Liquid Glass Modals */
+        /* Modals */
         .modal-overlay {
-            position: fixed; inset: 0; background: rgba(15, 5, 25, 0.75); backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px); z-index: 9998; display: none; align-items: center; justify-content: center; padding: 12px;
+            position: fixed; inset: 0; background: rgba(30, 10, 50, 0.75); backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px); z-index: 9998; display: none; align-items: center; justify-content: center; padding: 12px;
         }
         .modal-overlay.active { display: flex; }
         .details-sheet {
-            background: rgba(30, 12, 45, 0.75);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            background: rgba(60, 20, 90, 0.65);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1.5px solid var(--glass-border);
+            border-radius: 22px;
             width: 100%; max-width: 620px; max-height: 90vh; overflow-y: auto;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,182,222,0.25);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.85), inset 0 1px 3px rgba(255,255,255,0.4);
         }
         .sheet-banner { position: relative; height: 190px; background: rgba(0,0,0,0.4); }
         @media(min-width:640px) { .sheet-banner { height: 210px; } }
         .sheet-banner img { width: 100%; height: 100%; object-fit: cover; }
         .sheet-close {
             position: absolute; top: 12px; right: 12px; width: 32px; height: 32px;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); border-radius: 50%; color: #fff; display: grid; place-items: center; font-size: 14px;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); border-radius: 50%; color: #fff; display: grid; place-items: center; font-size: 14px;
         }
         .sheet-close:hover { background: #ef4444; }
         .sheet-content { padding: 18px 20px; }
@@ -254,29 +260,29 @@
 
         .meta-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-            background: rgba(20, 8, 30, 0.4); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 10px; border-radius: 12px; margin: 14px 0; text-align: center;
+            background: rgba(40, 10, 65, 0.45); backdrop-filter: blur(12px); border: 1.5px solid var(--glass-border); padding: 10px; border-radius: 14px; margin: 14px 0; text-align: center;
         }
         .meta-label { font-size: 0.7rem; color: var(--rbx-muted); }
         .meta-value { font-size: 0.85rem; font-weight: 700; margin-top: 2px; }
 
         .reviews-box {
-            margin-top: 14px; background: rgba(20, 8, 30, 0.45); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 12px;
+            margin-top: 14px; background: rgba(40, 10, 65, 0.45); backdrop-filter: blur(14px); border: 1.5px solid var(--glass-border); border-radius: 14px; padding: 12px;
         }
         .review-item {
-            font-size: 0.78rem; color: var(--rbx-subtext); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.78rem; color: var(--rbx-subtext); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .review-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
         .review-author { font-weight: 700; color: #fff; margin-bottom: 2px; display: flex; justify-content: space-between; }
 
         /* Chrome Window Modal */
         .browser-modal-overlay {
-            position: fixed; inset: 0; width: 100%; height: 100%; background: rgba(10, 3, 18, 0.85); backdrop-filter: blur(16px); z-index: 99999;
+            position: fixed; inset: 0; width: 100%; height: 100%; background: rgba(20, 5, 35, 0.85); backdrop-filter: blur(18px); z-index: 99999;
             display: none; align-items: center; justify-content: center;
         }
         .browser-modal-overlay.active { display: flex; }
         .chrome-window {
             width: 100%; max-width: 1020px; height: 100vh; height: 100dvh; background: #ffffff;
-            border-radius: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.8); position: relative;
+            border-radius: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 30px 70px rgba(0,0,0,0.85); position: relative;
         }
         @media(min-width: 768px) { .chrome-window { border-radius: 12px; height: 82vh; width: 92vw; } .browser-modal-overlay { padding: 16px; } }
         .chrome-titlebar { background: #dee1e6; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; flex-shrink: 0; }
@@ -304,12 +310,13 @@
 
         .infinite-loader {
             grid-column: 1 / -1; text-align: center; padding: 26px; font-size: 0.82rem; color: var(--rbx-muted); display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
         @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <!-- Liquid Glass Navigation -->
+    <!-- Bright Liquid Glass Navigation -->
     <nav class="rbx-navbar">
         <div class="rbx-nav-left">
             <a href="#" class="rbx-logo">
@@ -330,8 +337,8 @@
         </div>
 
         <div>
-            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" style="background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); padding:6px 14px; border-radius:20px; font-size:0.78rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
-                <i class="fa-brands fa-discord" style="color:#5865F2;"></i> Discord
+            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" style="background:rgba(255,255,255,0.15); border:1.5px solid var(--glass-border); padding:6px 14px; border-radius:20px; font-size:0.78rem; font-weight:600; display:inline-flex; align-items:center; gap:6px; box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+                <i class="fa-brands fa-discord" style="color:#7289da;"></i> Discord
             </a>
         </div>
     </nav>
@@ -365,12 +372,12 @@
             <div class="sheet-content">
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">
                     <div>
-                        <h2 id="detailTitle" style="font-size:1.25rem; font-weight:800;">Game Title</h2>
+                        <h2 id="detailTitle" style="font-size:1.25rem; font-weight:800; text-shadow:0 2px 8px rgba(0,0,0,0.5);">Game Title</h2>
                         <div style="font-size:0.78rem; color:var(--rbx-subtext); margin-top:2px;">
-                            By <strong id="detailCreator">Creator</strong> <i class="fa-solid fa-circle-check" style="color:#3b82f6; font-size:11px;"></i>
+                            By <strong id="detailCreator">Creator</strong> <i class="fa-solid fa-circle-check" style="color:#60a5fa; font-size:11px;"></i>
                         </div>
                     </div>
-                    <span id="detailGenre" style="background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); padding:4px 10px; border-radius:20px; font-size:0.7rem; font-weight:700; color:var(--rbx-subtext);">Hangout</span>
+                    <span id="detailGenre" style="background:rgba(255,255,255,0.18); border:1.5px solid var(--glass-border); padding:4px 10px; border-radius:20px; font-size:0.7rem; font-weight:700; color:var(--rbx-subtext);">Hangout</span>
                 </div>
 
                 <div class="meta-grid">
@@ -389,10 +396,10 @@
                 </div>
 
                 <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:4px;">Room & Layout Details</h4>
-                <p id="detailRoom" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); border:1px solid rgba(255,182,222,0.15); padding:10px; border-radius:10px; border-left:3px solid #00b06f;"></p>
+                <p id="detailRoom" style="font-size:0.8rem; color:#fff; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.2); padding:10px; border-radius:12px; border-left:4px solid #00cc82;"></p>
 
                 <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:4px;">Animation & Position Setup</h4>
-                <p id="detailPos" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); border:1px solid rgba(255,182,222,0.15); padding:10px; border-radius:10px; border-left:3px solid #d946ef;"></p>
+                <p id="detailPos" style="font-size:0.8rem; color:#fff; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.2); padding:10px; border-radius:12px; border-left:4px solid #ec4899;"></p>
 
                 <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:6px;">Player Reviews</h4>
                 <div class="reviews-box" id="detailReviews"></div>
@@ -405,11 +412,11 @@
     </div>
 
     <!-- Connecting Status Popup -->
-    <div id="loadingModal" style="position:fixed; inset:0; background:rgba(15,5,25,0.85); z-index:99998; display:none; align-items:center; justify-content:center; backdrop-filter:blur(10px); padding:16px;">
-        <div style="background:rgba(30,12,45,0.8); backdrop-filter:blur(20px); border:1px solid var(--glass-border); padding:22px; border-radius:16px; text-align:center; max-width:270px; width:100%; box-shadow:0 15px 35px rgba(0,0,0,0.5);">
-            <div style="width:34px; height:34px; border:3px solid rgba(255,255,255,0.15); border-top:3px solid #00b06f; border-radius:50%; animation:spin 0.9s linear infinite; margin:0 auto 10px;"></div>
+    <div id="loadingModal" style="position:fixed; inset:0; background:rgba(30,10,50,0.8); z-index:99998; display:none; align-items:center; justify-content:center; backdrop-filter:blur(16px); padding:16px;">
+        <div style="background:rgba(60,20,90,0.7); backdrop-filter:blur(24px); border:1.5px solid var(--glass-border); padding:22px; border-radius:18px; text-align:center; max-width:270px; width:100%; box-shadow:0 20px 50px rgba(0,0,0,0.6);">
+            <div style="width:34px; height:34px; border:3px solid rgba(255,255,255,0.2); border-top:3px solid #00cc82; border-radius:50%; animation:spin 0.9s linear infinite; margin:0 auto 10px;"></div>
             <h3 style="margin:0 0 4px; font-size:0.95rem; color:#fff;">Starting Roblox...</h3>
-            <p id="loadingText" style="margin:0; font-size:0.78rem; color:#d8b4e2;">Joining private server</p>
+            <p id="loadingText" style="margin:0; font-size:0.78rem; color:#f3c6ff;">Joining private server</p>
         </div>
     </div>
 
@@ -564,7 +571,7 @@
             grid.innerHTML = "";
 
             if (slice.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--rbx-muted); background:rgba(30,12,45,0.4); backdrop-filter:blur(14px); border-radius:16px; border:1px solid var(--glass-border);">No games found.</div>`;
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--rbx-muted); background:rgba(80,25,110,0.35); backdrop-filter:blur(16px); border-radius:18px; border:1.5px solid var(--glass-border);">No games found.</div>`;
                 document.getElementById("infiniteLoader").style.display = "none";
                 document.getElementById("resultCount").textContent = "0 Games";
                 return;
