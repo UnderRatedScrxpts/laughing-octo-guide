@@ -4,27 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Condo - Roblox</title>
-    <link rel="icon" type="image/png" sizes="512x512" href="https://cdn.phototourl.com/anon/2026-11-16-20c6fdbe-a040-4581-b25a-be63b260c1ae.jpg">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://upload.wikimedia.org/wikipedia/commons/7/70/Roblox_Corporation_2025_logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --rbx-nav: #191b1f;
-            --rbx-card: rgba(25, 27, 33, 0.88);
-            --rbx-card-hover: rgba(35, 38, 46, 0.94);
-            --rbx-border: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-bg-hover: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-border-hover: rgba(255, 255, 255, 0.28);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             --rbx-green: #00b06f;
             --rbx-green-hover: #00c47c;
             --rbx-text: #ffffff;
-            --rbx-subtext: #cfd0d2;
-            --rbx-muted: #848688;
+            --rbx-subtext: #d1d5db;
+            --rbx-muted: #9ca3af;
+            --rbx-yellow: #facc15;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body {
-            background: linear-gradient(rgba(11, 12, 15, 0.82), rgba(11, 12, 15, 0.92)), 
+            background: linear-gradient(rgba(10, 11, 15, 0.7), rgba(10, 11, 15, 0.85)), 
                         url('https://cdn.phototourl.com/anon/2026-11-16-e6b748db-92de-414d-8266-593f9f63d7bb.jpg') center/cover fixed no-repeat;
             color: var(--rbx-text);
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -35,11 +37,12 @@
         button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
         a { color: inherit; text-decoration: none; }
 
-        /* Responsive Top Navigation */
+        /* Liquid Glass Top Navigation */
         .rbx-navbar {
-            background: rgba(25, 27, 31, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--rbx-border);
+            background: rgba(18, 20, 26, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
             height: 60px;
             padding: 0 16px;
             display: flex;
@@ -61,13 +64,14 @@
             gap: 8px;
             font-weight: 800;
             font-size: 1.1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .custom-logo-img {
             width: 30px;
             height: 30px;
-            border-radius: 6px;
+            border-radius: 8px;
             object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--glass-border);
         }
         .rbx-nav-links {
             display: none;
@@ -80,6 +84,7 @@
         .rbx-nav-links span.active { color: #fff; position: relative; }
         .rbx-nav-links span.active::after {
             content: ''; position: absolute; bottom: -19px; left: 0; right: 0; height: 3px; background: #fff; border-radius: 2px;
+            box-shadow: 0 0 10px #fff;
         }
 
         .rbx-search {
@@ -89,15 +94,22 @@
         }
         .rbx-search input {
             width: 100%;
-            background: rgba(17, 18, 20, 0.9);
-            border: 1px solid var(--rbx-border);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
             padding: 7px 14px 7px 34px;
             color: #fff;
             font-size: 0.82rem;
             outline: none;
+            transition: all 0.2s ease;
         }
-        .rbx-search input:focus { border-color: rgba(255, 255, 255, 0.4); }
+        .rbx-search input:focus { 
+            border-color: rgba(255, 255, 255, 0.4); 
+            background: rgba(255, 255, 255, 0.09);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
         .rbx-search i {
             position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--rbx-muted); font-size: 12px;
         }
@@ -109,7 +121,7 @@
         }
         @media(min-width: 640px) { .container { padding: 24px 20px 60px; } }
 
-        /* Filter Bar */
+        /* Liquid Glass Filter Bar */
         .filter-bar {
             display: flex;
             align-items: center;
@@ -127,21 +139,22 @@
         }
         @media(min-width: 640px) { .pill-group { width: auto; } }
         .filter-pill {
-            background: var(--rbx-card);
-            backdrop-filter: blur(6px);
-            border: 1px solid var(--rbx-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
             color: var(--rbx-subtext);
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
             white-space: nowrap;
-            transition: all 0.15s ease;
+            transition: all 0.2s ease;
         }
-        .filter-pill:hover { background: var(--rbx-card-hover); color: #fff; }
-        .filter-pill.active { background: #fff; color: #111214; border-color: #fff; }
+        .filter-pill:hover { background: var(--glass-bg-hover); color: #fff; border-color: var(--glass-border-hover); }
+        .filter-pill.active { background: rgba(255, 255, 255, 0.9); color: #111214; border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.4); }
 
-        /* Mobile & PC Friendly Grid */
+        /* Liquid Glass Game Tiles Grid */
         .games-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -152,32 +165,36 @@
         @media (min-width: 1080px) { .games-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
         .game-tile {
-            background: var(--rbx-card);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--rbx-border);
-            border-radius: 12px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             cursor: pointer;
         }
         .game-tile:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+            transform: translateY(-4px);
+            border-color: var(--glass-border-hover);
+            background: var(--glass-bg-hover);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.05);
         }
         .tile-thumb {
             position: relative;
             aspect-ratio: 16 / 10;
-            background: #0d0e10;
+            background: rgba(0,0,0,0.3);
             overflow: hidden;
         }
         .tile-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .game-tile:hover .tile-thumb img { transform: scale(1.03); }
+        .game-tile:hover .tile-thumb img { transform: scale(1.04); }
         .vip-badge {
             position: absolute; bottom: 8px; left: 8px;
-            background: rgba(0, 176, 111, 0.92); color: #fff;
-            font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 5px;
+            background: rgba(0, 176, 111, 0.9); backdrop-filter: blur(4px); color: #fff;
+            font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 6px;
         }
         .tile-body {
             padding: 12px 14px;
@@ -190,31 +207,39 @@
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         .tile-stats {
-            display: flex; align-items: center; gap: 10px; font-size: 0.76rem; color: var(--rbx-subtext); margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: space-between; font-size: 0.76rem; color: var(--rbx-subtext); margin-bottom: 10px;
         }
+        .star-rating { color: var(--rbx-yellow); font-weight: 700; display: inline-flex; align-items: center; gap: 3px; }
         .rbx-play-btn {
             width: 100%; background: var(--rbx-green); color: #fff;
             font-weight: 700; font-size: 0.85rem; padding: 8px; border-radius: 8px;
             display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: auto;
+            box-shadow: 0 4px 15px rgba(0, 176, 111, 0.3);
+            transition: background 0.15s ease, box-shadow 0.15s ease;
         }
-        .rbx-play-btn:hover { background: var(--rbx-green-hover); }
+        .rbx-play-btn:hover { background: var(--rbx-green-hover); box-shadow: 0 4px 20px rgba(0, 176, 111, 0.5); }
 
-        /* Game Details Modal */
+        /* Liquid Glass Modals */
         .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px);
-            z-index: 9998; display: none; align-items: center; justify-content: center; padding: 12px;
+            position: fixed; inset: 0; background: rgba(5, 6, 9, 0.75); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); z-index: 9998; display: none; align-items: center; justify-content: center; padding: 12px;
         }
         .modal-overlay.active { display: flex; }
         .details-sheet {
-            background: #191b1f; border: 1px solid var(--rbx-border); border-radius: 14px;
-            width: 100%; max-width: 620px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+            background: rgba(22, 25, 34, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            width: 100%; max-width: 620px; max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15);
         }
-        .sheet-banner { position: relative; height: 190px; background: #0d0e10; }
+        .sheet-banner { position: relative; height: 190px; background: rgba(0,0,0,0.4); }
         @media(min-width:640px) { .sheet-banner { height: 210px; } }
         .sheet-banner img { width: 100%; height: 100%; object-fit: cover; }
         .sheet-close {
             position: absolute; top: 12px; right: 12px; width: 32px; height: 32px;
-            background: rgba(17,18,20,0.85); border-radius: 50%; color: #fff; display: grid; place-items: center; font-size: 14px;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); border-radius: 50%; color: #fff; display: grid; place-items: center; font-size: 14px;
         }
         .sheet-close:hover { background: #ef4444; }
         .sheet-content { padding: 18px 20px; }
@@ -222,28 +247,37 @@
 
         .meta-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-            background: #111214; padding: 10px; border-radius: 8px; margin: 14px 0; text-align: center;
+            background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); padding: 10px; border-radius: 10px; margin: 14px 0; text-align: center;
         }
         .meta-label { font-size: 0.7rem; color: var(--rbx-muted); }
         .meta-value { font-size: 0.85rem; font-weight: 700; margin-top: 2px; }
 
+        .reviews-box {
+            margin-top: 14px; background: rgba(0, 0, 0, 0.35); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 10px; padding: 12px;
+        }
+        .review-item {
+            font-size: 0.78rem; color: var(--rbx-subtext); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .review-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .review-author { font-weight: 700; color: #fff; margin-bottom: 2px; display: flex; justify-content: space-between; }
+
         /* Chrome Window Modal */
         .browser-modal-overlay {
-            position: fixed; inset: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 99999;
-            display: none; align-items: center; justify-content: center; backdrop-filter: blur(6px);
+            position: fixed; inset: 0; width: 100%; height: 100%; background: rgba(5, 6, 9, 0.82); backdrop-filter: blur(12px); z-index: 99999;
+            display: none; align-items: center; justify-content: center;
         }
         .browser-modal-overlay.active { display: flex; }
         .chrome-window {
             width: 100%; max-width: 1020px; height: 100vh; height: 100dvh; background: #ffffff;
-            border-radius: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0,0,0,0.7); position: relative;
+            border-radius: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.8); position: relative;
         }
-        @media(min-width: 768px) { .chrome-window { border-radius: 8px; height: 82vh; width: 92vw; } .browser-modal-overlay { padding: 16px; } }
+        @media(min-width: 768px) { .chrome-window { border-radius: 10px; height: 82vh; width: 92vw; } .browser-modal-overlay { padding: 16px; } }
         .chrome-titlebar { background: #dee1e6; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; flex-shrink: 0; }
         .chrome-tabs { display: flex; height: 28px; margin-top: 6px; }
         .chrome-tab {
             background: #ffffff; border-radius: 6px 6px 0 0; padding: 0 8px; min-width: 110px; max-width: 190px; display: flex; align-items: center; position: relative;
         }
-        .chrome-tab-icon { width: 13px; height: 13px; margin-right: 6px; object-fit: cover; border-radius: 2px; }
+        .chrome-tab-icon { width: 13px; height: 13px; margin-right: 6px; object-fit: contain; }
         .chrome-tab-title { font-size: 11px; color: #333; flex-grow: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
         .chrome-tab-close { font-size: 13px; color: #5f6368; cursor: pointer; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
         .chrome-window-controls { display: flex; }
@@ -268,7 +302,7 @@
     </style>
 </head>
 <body>
-    <!-- Top Responsive Navigation -->
+    <!-- Liquid Glass Top Navigation -->
     <nav class="rbx-navbar">
         <div class="rbx-nav-left">
             <a href="#" class="rbx-logo">
@@ -289,7 +323,7 @@
         </div>
 
         <div>
-            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" style="background:#27292e; padding:6px 12px; border-radius:8px; font-size:0.78rem; font-weight:600; display:inline-flex; align-items:center; gap:5px;">
+            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" style="background:rgba(255,255,255,0.06); border:1px solid var(--glass-border); padding:6px 12px; border-radius:8px; font-size:0.78rem; font-weight:600; display:inline-flex; align-items:center; gap:5px;">
                 <i class="fa-brands fa-discord" style="color:#5865F2;"></i> Discord
             </a>
         </div>
@@ -307,14 +341,14 @@
             <div style="font-size:0.8rem; color:var(--rbx-muted); font-weight:600;" id="resultCount">Showing games</div>
         </div>
 
-        <!-- Responsive Game Tiles Grid -->
+        <!-- Game Tiles Grid -->
         <div class="games-grid" id="gamesGrid"></div>
         <div class="infinite-loader" id="infiniteLoader">
             <i class="fa-solid fa-circle-notch fa-spin"></i> Loading more games...
         </div>
     </main>
 
-    <!-- Game Details Modal with Unique Room & Position Descriptions -->
+    <!-- Game Details Modal -->
     <div class="modal-overlay" id="detailsModal" onclick="if(event.target === this) closeDetails()">
         <div class="details-sheet">
             <div class="sheet-banner">
@@ -329,17 +363,17 @@
                             By <strong id="detailCreator">Creator</strong> <i class="fa-solid fa-circle-check" style="color:#3b82f6; font-size:11px;"></i>
                         </div>
                     </div>
-                    <span id="detailGenre" style="background:#27292e; padding:4px 10px; border-radius:20px; font-size:0.7rem; font-weight:700; color:var(--rbx-subtext);">Hangout</span>
+                    <span id="detailGenre" style="background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); padding:4px 10px; border-radius:20px; font-size:0.7rem; font-weight:700; color:var(--rbx-subtext);">Hangout</span>
                 </div>
 
                 <div class="meta-grid">
                     <div>
-                        <div class="meta-label">Playing</div>
+                        <div class="meta-label">Active Players</div>
                         <div class="meta-value" id="detailPlayers">18 / 20</div>
                     </div>
                     <div>
                         <div class="meta-label">Rating</div>
-                        <div class="meta-value" id="detailRating" style="color:var(--rbx-green);">98%</div>
+                        <div class="meta-value star-rating" id="detailRating" style="justify-content:center;">⭐ 4.9</div>
                     </div>
                     <div>
                         <div class="meta-label">Server</div>
@@ -348,12 +382,15 @@
                 </div>
 
                 <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:4px;">Room & Layout Details</h4>
-                <p id="detailRoom" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); padding:10px; border-radius:8px; border-left:3px solid #00b06f;"></p>
+                <p id="detailRoom" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); padding:10px; border-radius:8px; border-left:3px solid #00b06f;"></p>
 
                 <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:4px;">Animation & Position Setup</h4>
-                <p id="detailPos" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:16px; line-height:1.4; background:rgba(255,255,255,0.04); padding:10px; border-radius:8px; border-left:3px solid #a855f7;"></p>
+                <p id="detailPos" style="font-size:0.8rem; color:#f3eaf8; margin-bottom:12px; line-height:1.4; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); padding:10px; border-radius:8px; border-left:3px solid #a855f7;"></p>
 
-                <button class="rbx-play-btn" id="detailPlayBtn" style="padding:12px; font-size:0.95rem;">
+                <h4 style="font-size:0.85rem; font-weight:700; margin-bottom:6px;">Player Reviews</h4>
+                <div class="reviews-box" id="detailReviews"></div>
+
+                <button class="rbx-play-btn" id="detailPlayBtn" style="padding:12px; font-size:0.95rem; margin-top:16px;">
                     <i class="fa-solid fa-play"></i> Play
                 </button>
             </div>
@@ -361,21 +398,21 @@
     </div>
 
     <!-- Connecting Status Popup -->
-    <div id="loadingModal" style="position:fixed; inset:0; background:rgba(17,18,20,0.88); z-index:99998; display:none; align-items:center; justify-content:center; backdrop-filter:blur(4px); padding:16px;">
-        <div style="background:#191b1f; padding:22px; border-radius:14px; text-align:center; border:1px solid rgba(255,255,255,0.1); max-width:270px; width:100%;">
+    <div id="loadingModal" style="position:fixed; inset:0; background:rgba(5,6,9,0.85); z-index:99998; display:none; align-items:center; justify-content:center; backdrop-filter:blur(8px); padding:16px;">
+        <div style="background:rgba(25,27,35,0.8); backdrop-filter:blur(16px); border:1px solid var(--glass-border); padding:22px; border-radius:14px; text-align:center; max-width:270px; width:100%;">
             <div style="width:34px; height:34px; border:3px solid rgba(255,255,255,0.15); border-top:3px solid #00b06f; border-radius:50%; animation:spin 0.9s linear infinite; margin:0 auto 10px;"></div>
             <h3 style="margin:0 0 4px; font-size:0.95rem; color:#fff;">Starting Roblox...</h3>
             <p id="loadingText" style="margin:0; font-size:0.78rem; color:#bdbebe;">Joining private server</p>
         </div>
     </div>
 
-    <!-- Full Chrome Tab & Fake URL Bar Modal -->
+    <!-- Full Chrome Tab & Fake URL Bar Modal (Using Authentic Roblox Logo) -->
     <div id="browserModal" class="browser-modal-overlay">
         <div class="chrome-window">
             <div class="chrome-titlebar">
                 <div class="chrome-tabs">
                     <div class="chrome-tab active">
-                        <img src="https://cdn.phototourl.com/anon/2026-11-16-20c6fdbe-a040-4581-b25a-be63b260c1ae.jpg" class="chrome-tab-icon" id="modalTabIcon" alt="Logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Roblox_Corporation_2025_logo.svg" class="chrome-tab-icon" id="modalTabIcon" alt="Roblox Logo">
                         <span class="chrome-tab-title" id="modalTabTitle">Roblox</span>
                         <span class="chrome-tab-close" id="closeTabBtn">&times;</span>
                     </div>
@@ -451,6 +488,21 @@
             "Equipped with custom pose packs featuring synchronized bed interactions, spooning, and intimate hugging scripts."
         ];
 
+        const reviewPools = [
+            [
+                { user: "xX_VibeKing_Xx", text: "Smooth animations and zero lag in this private server. W map!", rating: "⭐⭐⭐⭐⭐" },
+                { user: "AestheticMochi", text: "Love the lighting controls and the bed positions work perfectly.", rating: "⭐⭐⭐⭐⭐" }
+            ],
+            [
+                { user: "Cloud9Lofi", text: "Best private link by far. Super clean rooms and great audio.", rating: "⭐⭐⭐⭐⭐" },
+                { user: "BludItsZay", text: "W private server, no lag at all.", rating: "⭐⭐⭐⭐" }
+            ],
+            [
+                { user: "NekoGirl99", text: "The custom poses and mirrors are so well made. 10/10", rating: "⭐⭐⭐⭐⭐" },
+                { user: "RBLX_Master", text: "Clean map layout, highly recommend joining.", rating: "⭐⭐⭐⭐⭐" }
+            ]
+        ];
+
         const genres = ["Hangout", "Roleplay", "Vibe"];
 
         let gamesList = [];
@@ -479,8 +531,9 @@
                 title: fullTitle,
                 creator: creators[index % creators.length],
                 genre: genres[index % genres.length],
-                players: `${Math.floor(Math.random() * 8) + 11}/20`,
-                rating: `${Math.floor(Math.random() * 11) + 88}%`,
+                players: `${Math.floor(Math.random() * 6) + 14}/20`,
+                rating: (4.7 + (index % 3) * 0.1).toFixed(1),
+                reviews: reviewPools[index % reviewPools.length],
                 serverType: "VIP Server",
                 thumb: gameThumbs[(index - 1) % gameThumbs.length],
                 room: roomPool[(index * 3) % roomPool.length],
@@ -504,7 +557,7 @@
             grid.innerHTML = "";
 
             if (slice.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--rbx-muted); background:var(--rbx-card); border-radius:12px;">No games found.</div>`;
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--rbx-muted); background:var(--glass-bg); backdrop-filter:blur(10px); border-radius:14px; border:1px solid var(--glass-border);">No games found.</div>`;
                 document.getElementById("infiniteLoader").style.display = "none";
                 document.getElementById("resultCount").textContent = "0 Games";
                 return;
@@ -525,8 +578,8 @@
                     <div class="tile-body">
                         <div class="tile-title" title="${game.title}">${game.title}</div>
                         <div class="tile-stats">
-                            <span><i class="fa-solid fa-thumbs-up"></i> ${game.rating}</span>
-                            <span><i class="fa-solid fa-user"></i> ${game.players}</span>
+                            <span class="star-rating">⭐ ${game.rating}</span>
+                            <span><i class="fa-solid fa-user" style="font-size:10px;"></i> ${game.players}</span>
                         </div>
                         <button class="rbx-play-btn" onclick="launchGame('${game.id}')">
                             <i class="fa-solid fa-play"></i> Play
@@ -581,10 +634,21 @@
             document.getElementById("detailCreator").textContent = game.creator;
             document.getElementById("detailGenre").textContent = game.genre;
             document.getElementById("detailPlayers").textContent = game.players;
-            document.getElementById("detailRating").textContent = game.rating;
+            document.getElementById("detailRating").innerHTML = `⭐ ${game.rating}`;
             document.getElementById("detailRegion").textContent = game.serverType;
             document.getElementById("detailRoom").textContent = game.room;
             document.getElementById("detailPos").textContent = game.position;
+
+            const reviewsContainer = document.getElementById("detailReviews");
+            reviewsContainer.innerHTML = "";
+            game.reviews.forEach(rev => {
+                reviewsContainer.innerHTML += `
+                    <div class="review-item">
+                        <div class="review-author"><span>${rev.user}</span> <span>${rev.rating}</span></div>
+                        <div>${rev.text}</div>
+                    </div>
+                `;
+            });
 
             const playBtn = document.getElementById("detailPlayBtn");
             playBtn.onclick = () => {
